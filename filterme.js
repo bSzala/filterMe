@@ -34,14 +34,18 @@ function FilterMe(){
      */
     var CUSTOM_TYPE = 'custom';
 
-
+    /**
+     * A list of allowed filter types
+     *
+     * @type {*[]}
+     */
     var allowed_filter_types = [
         SELECT_TYPE,
         CUSTOM_TYPE
     ]
 
     /**
-     * Defines allowed configuration variables
+     * A list of allowed configuration variables
      *
      * @type {string[]}
      */
@@ -55,26 +59,28 @@ function FilterMe(){
 
     /**
      * Object configuration
+     *
      * @type {{}}
      */
     app.config = {};
 
     /**
-     * Class used to find out if this app should be used
+     * Default class used to find out if this plugin should be used
+     *
      * @type {string}
      */
     var defaultSelectorClass = '.filterMePlease';
 
     /**
      * Filter element prefix - used to define an unique id for
-     * this app filter searcher field
+     * this filter searcher field
      *
      * @type {string}
      */
     var filterElementPrefix = 'filterMeSearcher';
 
     /************************************************
-     * Application methods
+     * Plugin methods
      ***********************************************/
 
     /**
@@ -87,7 +93,7 @@ function FilterMe(){
     };
 
     /**
-     * Checks if page contains any filter me elements
+     * Checks if page contains any filter elements
      *
      * @returns {boolean}
      */
@@ -96,9 +102,9 @@ function FilterMe(){
     };
 
     /**
-     * Get Id's of filter Me elements
+     * Get Id's of a filter elements
      *
-     * @returns {Array} A list with element names
+     * @returns {Array} A list containing element names
      */
     app.getFilterMeIdElementsList = function(){
         var idList = [];
@@ -143,6 +149,7 @@ function FilterMe(){
 
     /**
      * Checks if element has Id attribute defined
+     *
      * @param element
      * @returns {boolean}
      */
@@ -268,8 +275,9 @@ function FilterMe(){
 
     /**
      * Run filter data
-     * @param selector
-     * @param filter_txt
+     *
+     * @param selector Selector used
+     * @param filter_txt Filter text
      */
     app.run = function(selector,filter_txt){
         var type = app.getDataType();
@@ -285,9 +293,11 @@ function FilterMe(){
 
     /**
      * Filter data by custom callback method
-     * @param selector
-     * @param filter_txt
-     * @param callback
+     *
+     * @param selector Selector in question
+     * @param filter_txt Filter text
+     * @param callback Callback method
+     *
      * @return {*}
      */
     app.filterCustomCallbackData = function(selector, filter_txt, callback){
@@ -351,7 +361,7 @@ function FilterMe(){
     };
 
     /**
-     * Checks if selector is defiend
+     * Checks if selector is defined
      *
      * @return {boolean}
      */
@@ -359,6 +369,12 @@ function FilterMe(){
         return app.config["selector"] !== null;
     };
 
+    /**
+     * Get element id from unique search field id
+     *
+     * @param uniqueId
+     * @returns {XML|void|string}
+     */
     app.getElementIdFromUniqueSearchFieldId = function(uniqueId){
         return uniqueId.replace(filterElementPrefix,'');
     };
@@ -427,15 +443,20 @@ function FilterMe(){
     };
 
     /**
-     * Check if
-     * @param callback
+     * Check if custom callback exists
+     *
      * @return {boolean}
      */
     app.hasCustomCallback = function(){
         return app.isCallback(app.getCustomCallback());
     };
 
-
+    /**
+     * Validator for a callback method
+     *
+     * @param callback
+     * @returns {boolean}
+     */
     app.isCallback = function(callback){
         if(callback && typeof callback == "function"){
             return true;
@@ -443,10 +464,20 @@ function FilterMe(){
         return false;
     };
 
+    /**
+     * Get custom callback method
+     *
+     * @returns {*}
+     */
     app.getCustomCallback = function(){
         return app.config["custom_callback"];
     };
 
+    /**
+     * Set custom callback method
+     *
+     * @param callback Callback method
+     */
     app.setCustomCallback = function(callback){
         if(!app.isCallback(callback))
             throw new Error("Custom callback cannot be set not valid param: "+ callback);
@@ -464,7 +495,7 @@ function FilterMe(){
     };
 
     /**
-     * Get a default find Me configuration
+     * Get a default plugin configuration
      *
      * @returns {{obj}}
      */
@@ -478,18 +509,17 @@ function FilterMe(){
     };
 
     /**
-     * Init plugin
+     * Init a plugin
      *
      * @param config
      */
     app.init = function(configuration){
         app.setConfiguration(configuration);
         app.main();
-        // console.log('config',app.config);
     };
 
     /**
-     * Reset settings
+     * Reset settings (truncate configuration)
      */
     app.reset = function(){
         app.config = {};
@@ -507,7 +537,6 @@ function FilterMe(){
     /***********************************
      * Public method/property exposure
      **********************************/
-    //Example on how only a few methods could be exposed
     return {
         main: app.main,
         init: app.init,
