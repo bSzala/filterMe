@@ -538,7 +538,6 @@ function FilterMe(){
      * Public method/property exposure
      **********************************/
     return {
-        main: app.main,
         init: app.init,
         version: app.getVersion
     };
@@ -548,5 +547,5 @@ function FilterMe(){
 
 $(document).ready(function()
 {
-    FilterMe().init();
+    //FilterMe().init();
 });
