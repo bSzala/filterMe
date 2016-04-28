@@ -1,5 +1,7 @@
 # filterMe
-Useful jquery library for filtering elements within a page. In current version, library works only with select elements. 
+Useful jquery library for filtering elements within a page. By default works without configuration with all select HTML elements where ".filterMePlease" selector is used (see basic demo example).
+
+Of course, You can override all settings by triggering init method with your own params. 
 
 ## Dependencies 
 
@@ -16,9 +18,17 @@ Requires only to have jquery library already loaded
 ```
 <script src="filterme.js"></script>
 ```
-3.  Add class => *filterMePlease* to "select" element where You would like to use filter option (make sure element id is defined) 
+3.  Load filterMe plugin 
 ```
-<select class="filterMePlease" id="uniqueId">
+<script>
+  $(function(){
+       FilterMe().init();
+  });
+</script>
+```
+4.  Add class => *filterMePlease* to "select" element where You would like to have a filter feature
+```
+<select class="filterMePlease">
 ...
 </select>
 ```
